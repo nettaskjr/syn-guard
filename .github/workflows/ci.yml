@@ -40,7 +40,7 @@ jobs:
 
       - name: Criar pacote de distribuição
         run: |
-          tar -czvf syn-guard-${{ github.ref_name }}.tar.gz syn-guard.sh README.md PLANO_DE_TESTES.md
+          tar -czvf syn-guard-${{ github.ref_name }}.tar.gz syn-guard.sh
 
       - name: Criar Release no GitHub
         uses: softprops/action-gh-release@v1
