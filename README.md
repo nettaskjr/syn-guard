@@ -35,20 +35,22 @@ sudo dnf install jq
 sudo pacman -S jq
 ```
 
-## Instalação
-
-1. Clone este repositório ou baixe o script `syn-guard.sh`.
-2. Dê permissão de execução ao script:
-   ```bash
-   chmod +x syn-guard.sh
-   ```
-
 ## Uso
+### Instalação Fácil (Recomendado)
+
+Você pode instalar o `syn-guard` facilmente com o seguinte comando. Ele irá baixar a versão mais recente e a instalará em `/usr/local/bin`.
+
+```bash
+curl -sL https://raw.githubusercontent.com/nettaskjr/syn-guard/main/install.sh | sudo bash
+```
+
+
+### Execução
 
 Execute o script no seu terminal:
 
 ```bash
-./syn-guard.sh
+syn-guard
 ```
 
 ### Primeira Execução
