@@ -129,7 +129,7 @@ setup_wizard() {
 
     local devices
     local device_map=()
-    local count=1
+    #local count=1
     
     info "Detectando dispositivos de armazenamento..."
     # Lista dispositivos de bloco, excluindo certos tipos, e obtém NOME,RÓTULO,TAMANHO,SISTEMA DE ARQUIVOS,UUID,PONTO DE MONTAGEM
