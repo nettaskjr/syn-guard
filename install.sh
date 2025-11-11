@@ -8,7 +8,6 @@ set -e
 GITHUB_REPO="nettaskjr/syn-guard"
 INSTALL_DIR="/usr/local/bin"
 SCRIPT_NAME="syn-guard"
-#SCRIPT_FOLDER="${INSTALL_DIR}/${SCRIPT_NAME}"
 
 # Cores para output
 RED='\033[0;31m'
@@ -53,17 +52,12 @@ if [ -z "$LATEST_RELEASE_URL" ]; then
     exit 1
 fi
 
-# Cria o diretório de instalação se não existir
-# echo -e "${BLUE}Criando diretório de instalação em ${SCRIPT_FOLDER}...${NC}"
-# [ -f "${SCRIPT_FOLDER}" ] && rm -Rf "${SCRIPT_FOLDER}"
-# mkdir -p "${SCRIPT_FOLDER}"
-
 # Baixa o arquivo tar.gz e extrai para o diretório de instalação
 echo -e "${BLUE}Baixando e extraindo ${LATEST_RELEASE_URL}...${NC}"
 curl -L "${LATEST_RELEASE_URL}"| tar -xz -C "${INSTALL_DIR}"
 
 # Concede permissão de execução
-chmod +x "${INSTALL_DIR}/${SCRIPT_NAME}.sh"
+chmod +x "${INSTALL_DIR}/${SCRIPT_NAME}"
 
 echo -e "${GREEN}Instalação concluída com sucesso!${NC}"
 echo -e "${BLUE}Execute '$SCRIPT_NAME' para começar.${NC}"
