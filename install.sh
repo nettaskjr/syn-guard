@@ -23,8 +23,7 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-if ! command -v curl &> /dev/null || ! command -v jq &> /dev
-null; then
+if ! command -v curl &> /dev/null || ! command -v jq &> /dev/null; then
     echo -e "${YELLOW}Dependências 'curl' e 'jq' são necessárias.${NC}"
     echo "Instalando dependências..."
     if command -v apt-get &> /dev/null; then
