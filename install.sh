@@ -57,7 +57,7 @@ echo -e "${BLUE}Baixando e extraindo ${LATEST_RELEASE_URL}...${NC}"
 curl -L "${LATEST_RELEASE_URL}"| tar -xz -C "${INSTALL_DIR}"
 
 # Concede permissão de execução
-chmod +x "${INSTALL_DIR}/${SCRIPT_NAME}"
+chmod +x "${INSTALL_DIR}/${SCRIPT_NAME}.sh"
 
 echo -e "${GREEN}Instalação concluída com sucesso!${NC}"
 echo -e "${BLUE}Execute '$SCRIPT_NAME' para começar.${NC}"
