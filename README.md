@@ -41,7 +41,7 @@ sudo pacman -S jq
 Você pode instalar o `syn-guard` facilmente com o seguinte comando. Ele irá baixar a versão mais recente e a instalará em `/usr/local/bin`.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/nettaskjr/syn-guard/main/install.sh | sudo bash
+curl -sL https://raw.githubusercontent.com/nettaskjr/syn-guard/refs/heads/main/install.sh | sudo bash
 ```
 
 

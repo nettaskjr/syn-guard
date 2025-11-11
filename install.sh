@@ -42,7 +42,8 @@ fi
 echo "Buscando a versão mais recente..."
 
 # Obtém a URL do asset da última release que contém 'syn-guard.sh'
-LATEST_RELEASE_URL=$(curl -s "https://api.github.com/repos/${GITHUB_REPO}/releases/latest" | jq -r '.assets[] | select(.name | contains("syn-guard.sh")) | .browser_download_url' | head -n 1)
+TAG_NAME=$(curl -s https://api.github.com/repos/${GITHUB_REPO}/releases/latest | jq -r '.tag_name')
+LATEST_RELEASE_URL="https://github.com/${GITHUB_REPO}/releases/download/${TAG_NAME}/${SCRIPT_NAME}_${TAG_NAME}.tar.gz"
 
 if [ -z "$LATEST_RELEASE_URL" ]; then
     echo "Não foi possível encontrar um asset de release contendo 'syn-guard.sh'. Verifique o repositório e as releases."
