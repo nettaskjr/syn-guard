@@ -21,9 +21,9 @@ echo -e "${BLUE}Iniciando a instalação do $SCRIPT_NAME...${NC}"
 
 # --- Verificações ---
 if [ "$EUID" -ne 0 ]; then
-  echo -e "${YELLOW}Este script precisa ser executado com privilégios de superusuário (sudo).${NC}"
-  echo "${YELLOW}Por favor, execute novamente com: sudo bash $0${NC}"
-  exit 1
+    echo -e "${YELLOW}Este script precisa ser executado com privilégios de superusuário (sudo).${NC}"
+    echo "${YELLOW}Por favor, execute novamente com: sudo bash $0${NC}"
+    exit 1
 fi
 
 if ! command -v curl &> /dev/null || ! command -v jq &> /dev/null; then
@@ -55,6 +55,7 @@ fi
 
 # Cria o diretório de instalação se não existir
 echo "${BLUE}Criando diretório de instalação em ${SCRIPT_FOLDER}...${NC}"
+[ -f "${SCRIPT_FOLDER}" ] || rm -Rf "${SCRIPT_FOLDER}"
 mkdir -p "${SCRIPT_FOLDER}"
 
 # Baixa o arquivo tar.gz e extrai para o diretório de instalação
