@@ -119,7 +119,7 @@ write_config() {
 setup_wizard() {
     local source_dir
     while true; do
-        read -erp "Por favor, informe o caminho completo da pasta de origem para o backup: " -i "/home/$USER/" source_dir
+        read -erp "Por favor, informe o caminho completo da pasta de origem para o backup: " -i "/home/" source_dir
         if [ -d "$source_dir" ]; then
             break
         else
