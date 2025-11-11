@@ -127,22 +127,16 @@ setup_wizard() {
         fi
     done
 
-    local devices
     local device_map=()
-    #local count=1
     
     info "Detectando dispositivos de armazenamento..."
-    # Lista dispositivos de bloco, excluindo certos tipos, e obtém NOME,RÓTULO,TAMANHO,SISTEMA DE ARQUIVOS,UUID,PONTO DE MONTAGEM
-    devices=$(lsblk -o NAME,LABEL,SIZE,FSTYPE,UUID,MOUNTPOINT -p -n -l | grep -v -E 'swap|ntfs|rom' | awk '$5!=""')
+    # Lê a saída do lsblk diretamente para o array 'device_map', corrigindo o aviso SC2124 do shellcheck.
+    mapfile -t device_map < <(lsblk -o NAME,LABEL,SIZE,FSTYPE,UUID,MOUNTPOINT -p -n -l | grep -v -E 'swap|ntfs|rom' | awk '$5!=""')
 
-    if [ -z "$devices" ]; then
+    if [ ${#device_map[@]} -eq 0 ]; then
         error "Nenhum dispositivo de armazenamento adequado encontrado. O script não pode continuar."
         exit 1
     fi
-
-    while IFS= read -r line; do
-        device_map+=("$line")
-    done <<< "$devices"
 
     local selected_device_info
     local dest_uuid
