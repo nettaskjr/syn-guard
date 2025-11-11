@@ -55,7 +55,7 @@ fi
 
 # Cria o diretório de instalação se não existir
 echo "${BLUE}Criando diretório de instalação em ${SCRIPT_FOLDER}...${NC}"
-[ -f "${SCRIPT_FOLDER}" ] || rm -Rf "${SCRIPT_FOLDER}"
+[ -f "${SCRIPT_FOLDER}" ] && rm -Rf "${SCRIPT_FOLDER}"
 mkdir -p "${SCRIPT_FOLDER}"
 
 # Baixa o arquivo tar.gz e extrai para o diretório de instalação
