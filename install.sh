@@ -6,7 +6,7 @@ set -e
 
 # --- Variáveis ---
 GITHUB_REPO="nettaskjr/syn-guard"
-INSTALL_DIR="/usr/local/bin"
+INSTALL_DIR="/usr/bin"
 SCRIPT_NAME="syn-guard"
 
 # Cores para output
