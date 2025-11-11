@@ -24,7 +24,7 @@ LOG_FILE="$LOG_DIR/syn-guard_$(date +%Y-%m-%d).log"
 log() {
     local level="$1"
     shift
-    local message="$@"
+    local message="$*"
     echo "$(date +'%Y-%m-%d %H:%M:%S') [$level] - $message" | sudo tee -a "$LOG_FILE" >/dev/null
 }
 
