@@ -44,7 +44,6 @@ Você pode instalar o `syn-guard` facilmente com o seguinte comando. Ele irá ba
 curl -sL https://raw.githubusercontent.com/nettaskjr/syn-guard/refs/heads/main/install.sh | sudo bash
 ```
 
-
 ### Execução
 
 Execute o script no seu terminal:

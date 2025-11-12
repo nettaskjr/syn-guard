@@ -51,8 +51,8 @@ Para facilitar os testes, a seguinte estrutura pode ser criada na pasta de orige
 ```
 ~/teste_backup_origem/
 ├── documentos/
-│   ├── relatorio_final.docx
-│   └── apresentacao.pptx
+│   ├── relatório_final.docx
+│   └── apresentação.pptx
 ├── imagens/
 │   ├── ferias_2024/
 │   │   ├── foto1.jpg
