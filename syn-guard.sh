@@ -396,7 +396,7 @@ main() {
 
     # Menu de Ação
     info "O que você gostaria de fazer?"
-    select action in "Fazer Backup" "Restaurar Backup" "Sair" "Atualizar Versão"; do
+    select action in "Fazer Backup" "Restaurar Backup" "Editar syn-guard.json" "Sair" "Atualizar Versão"; do
         case $action in
             "Fazer Backup")
                 run_backup
@@ -405,6 +405,17 @@ main() {
             "Restaurar Backup")
                 run_restore
                 break
+                ;;
+            "Editar syn-guard.json")
+                if [ -f "$CONFIG_FILE" ]; then
+                    nano "$CONFIG_FILE"
+                    read_config # Recarrega as configurações após a edição
+                    success "Configurações recarregadas."
+                else
+                    error "Arquivo de configuração não encontrado para editar."
+                fi
+                # Mostra o menu novamente
+                info "O que você gostaria de fazer?"
                 ;;
             "Sair")
                 info "Operação cancelada pelo usuário."
@@ -416,7 +427,7 @@ main() {
                 info "O que você gostaria de fazer?"
                 ;;
             *) 
-                warning "Opção inválida. Por favor, selecione 1, 2, 3 ou 4."
+                warning "Opção inválida. Por favor, selecione 1, 2, 3, 4 ou 5."
                 ;;
         esac
     done
