@@ -5,6 +5,8 @@
 # Encerra imediatamente se um comando sair com um status diferente de zero.
 set -e
 
+# --- Variáveis e Cores ---
+
 # Cores para output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -19,6 +21,18 @@ LOG_DIR="/var/log/syn-guard"
 LOG_FILE="$LOG_DIR/syn-guard_$(date +%Y-%m-%d).log"
 
 # --- Funções Auxiliares ---
+
+# Executa o script de atualização oficial
+run_update() {
+    echo -e "${BLUE}Iniciando atualização do syn-guard...${NC}"
+    if curl -sL https://raw.githubusercontent.com/nettaskjr/syn-guard/refs/heads/main/install.sh | sudo bash; then
+        echo -e "${GREEN}Atualização concluída com sucesso!${NC}"
+        echo -e "${BLUE}Por favor, execute o script novamente.${NC}"
+        exit 0
+    else
+        echo -e "${RED}Falha ao executar o script de atualização.${NC}"
+    fi
+}
 
 # Registra mensagens
 log() {
@@ -382,7 +396,7 @@ main() {
 
     # Menu de Ação
     info "O que você gostaria de fazer?"
-    select action in "Fazer Backup" "Restaurar Backup" "Sair"; do
+    select action in "Fazer Backup" "Restaurar Backup" "Sair" "Atualizar Versão"; do
         case $action in
             "Fazer Backup")
                 run_backup
@@ -396,8 +410,13 @@ main() {
                 info "Operação cancelada pelo usuário."
                 exit 0
                 ;;
+            "Atualizar Versão")
+                run_update
+                # Mostra o menu novamente caso a atualização falhe e o script não saia
+                info "O que você gostaria de fazer?"
+                ;;
             *) 
-                warning "Opção inválida. Por favor, selecione 1, 2 ou 3."
+                warning "Opção inválida. Por favor, selecione 1, 2, 3 ou 4."
                 ;;
         esac
     done
