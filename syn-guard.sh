@@ -396,7 +396,8 @@ main() {
 
     # Menu de Ação
     info "O que você gostaria de fazer?"
-    select action in "Fazer Backup" "Restaurar Backup" "Editar syn-guard.json" "Sair" "Atualizar Versão"; do
+    COLUMNS=1
+    select action in "Fazer Backup" "Restaurar Backup" "Editar syn-guard.json" "Atualizar Versão" "Sair"; do
         case $action in
             "Fazer Backup")
                 run_backup
@@ -417,14 +418,14 @@ main() {
                 # Mostra o menu novamente
                 info "O que você gostaria de fazer?"
                 ;;
-            "Sair")
-                info "Operação cancelada pelo usuário."
-                exit 0
-                ;;
             "Atualizar Versão")
                 run_update
                 # Mostra o menu novamente caso a atualização falhe e o script não saia
                 info "O que você gostaria de fazer?"
+                ;;
+            "Sair")
+                info "Operação cancelada pelo usuário."
+                exit 0
                 ;;
             *) 
                 warning "Opção inválida. Por favor, selecione 1, 2, 3, 4 ou 5."
