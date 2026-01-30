@@ -3,8 +3,6 @@ name: CI/CD para syn-guard
 on:
   push:
     branches: [ main ]
-    tags:
-      - 'v*' # Executa para tags como v1.0, v1.2.3
   pull_request:
     branches: [ main ]
 
@@ -29,20 +27,31 @@ jobs:
   release:
     name: Criar Release e Pacote
     runs-on: ubuntu-latest
-    needs: lint # A release só acontece se o lint passar
-    if: startsWith(github.ref, 'refs/tags/') # Executa este job apenas para tags
+    needs: lint
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
-      contents: write # Concede permissão para escrever no repositório (criar release)
+      contents: write
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Gerar nova Tag e Changelog
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Criar pacote de distribuição
         run: |
-          tar -czvf syn-guard-${{ github.ref_name }}.tar.gz syn-guard.sh
+          tar -czvf syn-guard-${{ steps.tag_version.outputs.new_tag }}.tar.gz syn-guard.sh
 
       - name: Criar Release no GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          files: syn-guard-${{ github.ref_name }}.tar.gz
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+          files: syn-guard-${{ steps.tag_version.outputs.new_tag }}.tar.gz
