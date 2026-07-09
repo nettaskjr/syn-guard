@@ -117,7 +117,7 @@ write_config() {
     excludes_json=$(jq -n '[
         ".cache/", ".config/Insync/", ".local/share/Insync/", ".local/share/Trash/", 
         ".var/app/com.valvesoftware.Steam/Insync/", "s3/", "VirtualBox VMs/", 
-        "Insync/", "AppImages/", "Projetos-github/", "/timeshift/"
+        "Insync/", "AppImages/", "/timeshift/"
     ]')
 
     local howto_exclude="HOW-TO: Para personalizar as exclusões, edite o array 'exclude_dirs' abaixo. Os caminhos são relativos à pasta de origem. Adicione uma '/' no final para excluir o conteúdo de um diretório. Ex: 'minha_pasta/'."
