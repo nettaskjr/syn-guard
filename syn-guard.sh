@@ -95,28 +95,6 @@ setup_environment() {
     sudo chown "$USER":"$USER" "$LOG_FILE"
 }
 
-# Desmonta o dispositivo de backup se estiver montado
-unmount_backup_drive() {
-    info "Verificando se há dispositivo montado em $MOUNT_POINT..."
-    
-    # Verifica se há algo montado no ponto de montagem
-    if mountpoint -q "$MOUNT_POINT"; then
-        local mounted_device
-        mounted_device=$(findmnt -n -o SOURCE "$MOUNT_POINT")
-        
-        info "Dispositivo $mounted_device está montado em $MOUNT_POINT. Desmontando..."
-        if sudo umount "$MOUNT_POINT"; then
-            success "Dispositivo desmontado com sucesso de $MOUNT_POINT."
-            log "INFO" "Dispositivo $mounted_device desmontado de $MOUNT_POINT pelo usuário."
-        else
-            error "Falha ao desmontar o dispositivo de $MOUNT_POINT. Verifique se há processos usando o ponto de montagem."
-            return 1
-        fi
-    else
-        warning "Nenhum dispositivo montado em $MOUNT_POINT."
-    fi
-}
-
 # Lê a configuração do arquivo JSON
 read_config() {
     if [ -f "$CONFIG_FILE" ]; then
@@ -419,7 +397,7 @@ main() {
     # Menu de Ação
     info "O que você gostaria de fazer?"
     COLUMNS=1
-    select action in "Fazer Backup" "Restaurar Backup" "Editar syn-guard.json" "Atualizar Versão" "Desmontar HD de Backup" "Sair"; do
+    select action in "Fazer Backup" "Restaurar Backup" "Editar syn-guard.json" "Atualizar Versão" "Sair"; do
         case $action in
             "Fazer Backup")
                 run_backup
@@ -445,17 +423,12 @@ main() {
                 # Mostra o menu novamente caso a atualização falhe e o script não saia
                 info "O que você gostaria de fazer?"
                 ;;
-            "Desmontar HD de Backup")
-                unmount_backup_drive
-                # Mostra o menu novamente
-                info "O que você gostaria de fazer?"
-                ;;
             "Sair")
                 info "Operação cancelada pelo usuário."
                 exit 0
                 ;;
             *) 
-                warning "Opção inválida. Por favor, selecione 1, 2, 3, 4, 5 ou 6."
+                warning "Opção inválida. Por favor, selecione 1, 2, 3, 4 ou 5."
                 ;;
         esac
     done
