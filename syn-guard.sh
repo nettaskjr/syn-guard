@@ -80,15 +80,15 @@ check_dependencies() {
 # Cria os diretórios e arquivos necessários
 setup_environment() {
     if [ ! -d "$MOUNT_POINT" ]; then
-        info "Ponto de montagem $MOUNT_POINT não encontrado. Criando..."
         sudo mkdir -p "$MOUNT_POINT"
+        info "Ponto de montagem $MOUNT_POINT não encontrado. Criando..."
         success "Ponto de montagem criado."
     fi
 
     if [ ! -d "$LOG_DIR" ]; then
-        info "Diretório de log $LOG_DIR não encontrado. Criando..."
         sudo mkdir -p "$LOG_DIR"
         sudo chown "$USER":"$USER" "$LOG_DIR"
+        info "Diretório de log $LOG_DIR não encontrado. Criando..."
         success "Diretório de log criado."
     fi
     sudo touch "$LOG_FILE"
